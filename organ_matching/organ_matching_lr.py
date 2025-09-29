@@ -12,7 +12,7 @@ from organ_matching.organ_matching_utils import get_precision, \
 
 
 def get_organ_matching_from_description(desc_1, desc_2):
-    org_1 = np.array(range(0, desc_1.shape[0]))
+    # org_1 = np.array(range(0, desc_1.shape[0])) # deleted since it is not used anymore
     org_2 = np.array(range(0, desc_2.shape[0]))
 
     matches = -1 * np.ones(desc_1.shape[0])

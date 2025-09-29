@@ -1,7 +1,7 @@
 pyntcloud==0.1.4
 tqdm==4.59.0
 numpy
-open3d==0.12.0
+open3d
 networkx==2.5.1
 
 scipy
@@ -17,3 +17,4 @@ robust-laplacian==0.2.2
 
 joblib==1.0.1
 imageio==2.9.0
+pot

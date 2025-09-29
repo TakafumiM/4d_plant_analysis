@@ -4,7 +4,7 @@ import sys
 import time
 import json
 import numpy as np
-sys.path.insert(0, "../")
+
 import open3d
 from point_cloud_clean import clean_point_cloud
 from p2p_matching_in_organ.landmark_utils import get_skeleton
@@ -64,7 +64,7 @@ def get_p2p_mapping_organ_collection(organ_collection_1,
     :param options: the other hyper parameters
     :return:
     """
-    options_path = "../hyper_parameters/lyon2.json"
+    options_path = f"hyper_parameters/{dataset}.json"
     if not options:
         with open(options_path, "r") as json_file:
             options = json.load(json_file)
@@ -188,7 +188,7 @@ def form_tomato_org(day1, options=None):
 
     # Load the options if it's not given
     if options is None:
-        options_path = "../hyper_parameters/tomato.json"
+        options_path = "hyper_parameters/tomato.json"
         with open(options_path, "r") as json_file:
             options = json.load(json_file)
 
@@ -231,16 +231,18 @@ def form_tomato_org(day1, options=None):
 
 
 if __name__ == "__main__":
-    # day1 = "05-12_AM"
-    # day2 = "05-13_AM"
-    day1 = "03-22_PM"
-    day2 = "03-23_PM"
-    dataset = "lyon2"
+    import argparse
+    parser = argparse.ArgumentParser(description="Run p2p matching on segments.")
+    parser.add_argument("--dataset", type=str, default="tomato", help="Dataset name (e.g., 'tomato', 'maize', 'lyon2').")
+    parser.add_argument("--day1", type=str, default="03-22_PM", help="First day/timestamp.")
+    parser.add_argument("--day2", type=str, default="03-23_PM", help="Second day/timestamp.")
+    args = parser.parse_args()
+
     t_start = time.time()
 
-    if dataset == "lyon2":
+    if args.dataset == "lyon2":
         matches_index, org_collection_1, org_collection_2 = \
-            match_organ_two_days(day1, day2, dataset, visualize=True, verbose=True)
+            match_organ_two_days(args.day1, args.day2, args.dataset, visualize=True, verbose=True)
         t_end = time.time()
         print("Get the organs matched, used ", t_end - t_start, " s")
 
@@ -248,42 +250,30 @@ if __name__ == "__main__":
         get_p2p_mapping_organ_collection(org_collection_1[0:1] + org_collection_1[3:],
                                          org_collection_2,
                                          np.append(matches_index[0:1], matches_index[3:]),
-                                         day1=day1,
-                                         day2=day2,
-                                         dataset=dataset,
+                                         day1=args.day1,
+                                         day2=args.day2,
+                                         dataset=args.dataset,
                                          if_match_skeleton=False,
                                          plot_mesh=False,
                                          plot_pcd=False,
                                          verbose=False,
                                          show_all=False)
-
-        # get_p2p_mapping_organ_collection(org_collection_1[0:1],
-        #                                  org_collection_2,
-        #                                  matches_index[0:1],
-        #                                  day1=day1,
-        #                                  day2=day2,
-        #                                  dataset=dataset,
-        #                                  if_match_skeleton=False,
-        #                                  plot_mesh=True,
-        #                                  plot_pcd=True,
-        #                                  verbose=False,
-        #                                  show_all=False)
-
         t_end = time.time()
         print("Total time used: ", t_end - t_start)
 
-    if dataset == "tomato":
+    if args.dataset == "tomato":
         # 'pcd', 'stem_connect_point', 'skeleton_pcd', 'skeleton_connection', 'segment_index'
-        org_collection_1 = [form_tomato_org(day1)]
-        org_collection_2 = [form_tomato_org(day2)]
+        org_collection_1 = [form_tomato_org(args.day1)]
+        org_collection_2 = [form_tomato_org(args.day2)]
         matches_index = [0]
         get_p2p_mapping_organ_collection(org_collection_1,
                                          org_collection_2,
                                          matches_index,
-                                         day1=day1,
-                                         day2=day2,
-                                         dataset=dataset,
+                                         day1=args.day1,
+                                         day2=args.day2,
+                                         dataset=args.dataset,
                                          plot_mesh=False,
                                          plot_pcd=False,
                                          verbose=False,
                                          show_all=False)
+

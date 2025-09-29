@@ -27,6 +27,8 @@ Install these python packages by `pip install -r requirements.txt`
 
 ## Usage 
 
+**Note: Run export XDG_SESSION_TYPE=x11 for WSL2**
+
 ### Registration
 
 - Download the data from [https://media.romi-project.eu/data/4d_plant_analysis_data.zip]

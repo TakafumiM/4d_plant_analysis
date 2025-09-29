@@ -96,7 +96,7 @@ def get_p2p_mapping_organ_collection(organ_collection_1,
     :param options: the other hyper parameters
     :return:
     """
-    options_path = "../hyper_parameters/{}.json".format(dataset)
+    options_path = "hyper_parameters/{}.json".format(dataset)
     if not options:
         with open(options_path, "r") as json_file:
             options = json.load(json_file)
@@ -249,7 +249,7 @@ def form_tomato_org(day1, options=None):
 
     # Load the options if it's not given
     if options is None:
-        options_path = "../hyper_parameters/tomato.json"
+        options_path = "hyper_parameters/tomato.json"
         with open(options_path, "r") as json_file:
             options = json.load(json_file)
 
@@ -324,7 +324,7 @@ def form_maize_org(day1, options=None):
 
     # Load the options if it's not given
     if options is None:
-        options_path = "../hyper_parameters/maize.json"
+        options_path = "hyper_parameters/maize.json"
         with open(options_path, "r") as json_file:
             options = json.load(json_file)
 

@@ -6,7 +6,7 @@ import numpy as np
 import sys
 import open3d
 
-sys.path.insert(0, "../")
+
 from point_cloud_clean import clean_point_cloud
 from sklearn.neighbors import KDTree
 from p2p_matching_in_organ.landmark_utils import get_skeleton, get_mesh_landmarks
@@ -140,7 +140,7 @@ def get_p2p_mapping_organ(pcd1, pcd2,
                           process_params=None,
                           apply_double_direction_refinement=True,
                           fit_params=None):
-    options_path = "../hyper_parameters/lyon2.json"
+    options_path = "hyper_parameters/lyon2.json"
     with open(options_path, "r") as json_file:
         options = json.load(json_file)
 
@@ -194,7 +194,7 @@ def get_p2p_mapping_organ_collection(organ_collection_1,
                                      plot_skeleton=False,
                                      show_all=True,
                                      options=None):
-    options_path = "../hyper_parameters/lyon2.json"
+    options_path = f"hyper_parameters/{dataset}.json"
     if not options:
         with open(options_path, "r") as json_file:
             options = json.load(json_file)

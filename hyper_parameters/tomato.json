@@ -1,11 +1,11 @@
 {
-  "root_path": "../data/{}/{}/",
-  "pc_path": "../data/{}/processed/{}_segmented.ply",
-  "skel_path": "../data/{}/{}/skeleton_{}_connected.txt",
-  "skel_noted_path": "../data/{}/{}/skeleton_{}_noted.csv",
-  "segment_connect_path": "../data/{}/{}/branch_connection_{}.csv",
-  "stem_node_path": "../data/{}/{}/stem_nodes_ordered.csv",
-  "p2p_save_path_segment": "../data/{}/registration_result/{}_to_{}/",
+  "root_path": "data/{}/{}/",
+  "pc_path": "data/{}/processed/{}_segmented.ply",
+  "skel_path": "data/{}/{}/skeleton_{}_connected.txt",
+  "skel_noted_path": "data/{}/{}/skeleton_{}_noted.csv",
+  "segment_connect_path": "data/{}/{}/branch_connection_{}.csv",
+  "stem_node_path": "data/{}/{}/stem_nodes_ordered.csv",
+  "p2p_save_path_segment": "data/{}/registration_result/{}_to_{}/",
 
   "mesh_radius_factor": 2,
   "pcd_clean_option": {

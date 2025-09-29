@@ -5,13 +5,13 @@ import time
 import json
 import numpy as np
 import open3d
-sys.path.insert(0, "../")
+
 from organ_matching.organ_matching_lr import match_organ_two_days
 from p2p_matching_in_organ.p2p_matching_seg_icp import form_maize_org, form_tomato_org
 from visualize_p2p import visualize_pcd_registration_series
 import argparse
 
-os.chdir('./p2p_matching_in_organ')
+
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--type",
@@ -42,7 +42,7 @@ if method == "local_icp":
 else:
     from p2p_matching_in_organ.p2p_matching_seg_fm import get_p2p_mapping_organ_collection
 
-score_path = "../scores/"
+score_path = "scores/"
 
 if __name__ == "__main__":
     if dataset == "lyon2":
@@ -55,7 +55,7 @@ if __name__ == "__main__":
         days = ["03-13_AM", "03-14_AM", "03-15_AM", "03-16_AM", "03-17_AM", "03-18_AM", "03-20_AM"]
     run_registration = True
 
-    options_path = "../hyper_parameters/{}.json".format(dataset)
+    options_path = "hyper_parameters/{}.json".format(dataset)
     with open(options_path, "r") as json_file:
         options = json.load(json_file)
 

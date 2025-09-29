@@ -26,7 +26,6 @@ def get_segment_description(segment):
     orientation = (skeleton[-1] - skeleton[0]) / (2*10**-5 + np.linalg.norm(skeleton[-1] - skeleton[0]))
     length = np.sum([np.linalg.norm(skeleton[i+1] - skeleton[i]) for i in range(skeleton.shape[0] - 1)])
     length = length / 50.0
-    organ_center_offset = center_position - segment['organ_center_offset'] / 50
     degree = segment["degree"]
     point_number_proportion = segment["point_number_proportion"]
     geodesic_distance = segment['geodesic_distance']
@@ -35,8 +34,7 @@ def get_segment_description(segment):
                       length,
                       degree,
                       point_number_proportion,
-                      geodesic_distance,
-                      organ_center_offset])
+                      geodesic_distance])
 
 
 def label_train_set(day1, day2):
@@ -99,7 +97,7 @@ def label_train_set(day1, day2):
     return
 
 
-def get_train_set(day1 = None, day2 = None, data_path = "./training_data_new/"):
+def get_train_set(day1 = None, day2 = None, data_path = "segment_matching/training_data_new/"):
     days = [("03-20_AM", "03-20_PM"), ("03-20_PM", "03-21_AM"), ("03-21_AM", "03-21_PM"), ("03-21_PM", "03-22_AM"),
             ("03-22_AM", "03-22_PM"), ("03-22_PM", "03-23_AM"), ("03-23_AM", "03-23_PM"), ("03-22_PM", "03-23_PM")]
 
@@ -353,7 +351,7 @@ def training(model,
     return clf
 
 
-def load_model(model=None, isstem=False, path="../segment_matching/clf_model"):
+def load_model(model=None, isstem=False, path="segment_matching/clf_model"):
     if model not in {"random_forest", "SVC", "logistic_regression"}:
         model = "random_forest"
     if isstem:
@@ -368,7 +366,7 @@ if __name__ == "__main__":
     day2 = "03-20_PM"
 
     # label_train_set(day1, day2)
-    features, labels = get_train_set()
+    # features, labels = get_train_set()
     # clf = load_model("random_forest")
     #
     clf = training("random_forest")
